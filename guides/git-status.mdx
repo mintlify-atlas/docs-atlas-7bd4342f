@@ -1,0 +1,220 @@
+---
+title: git status
+description: Check the current state of your Git working directory and staging area with git status
+---
+
+```bash
+git status
+```
+
+`git status` shows the current state of your Git working directory and staging area.
+
+## What Does `git status` Do?
+
+<Tip>
+When in doubt, run `git status`. This is *always* a good idea. The `git status` command only outputs information, it won't modify commits or changes in your local repository.
+</Tip>
+
+A useful feature of `git status` is that it will provide helpful information depending on your current situation. In general, you can count on it to tell you:
+
+- Where `HEAD` is pointing, whether that is a branch or a commit (this is where you are "checked out" to)
+- If you have any changed files in your current directory that have not yet been committed
+- If changed files are staged or not
+- If your current local branch is linked to a remote branch, then `git status` will tell you if your local branch is behind or ahead by any commits
+
+<Note>
+During merge conflicts, `git status` will also tell you exactly which files are the source of the conflict.
+</Note>
+
+## How to Use `git status`
+
+### Common usages and options for `git status`
+
+<CodeGroup>
+```bash Default format
+git status
+```
+
+```bash Short format
+git status -s
+```
+
+```bash Verbose format
+git status -v
+```
+</CodeGroup>
+
+- `git status`: Most often used in its default form, this shows a good base of information
+- `git status -s`: Give output in short format
+- `git status -v`: Shows more "verbose" detail including the textual changes of any uncommitted files
+
+<Tip>
+You can see all of the options with `git status` in [git-scm's documentation](https://git-scm.com/docs/git-status).
+</Tip>
+
+## Example Output
+
+When you run `git status`, you might see output like this:
+
+```bash
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   README.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        new-file.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+This output tells you:
+
+<Steps>
+  <Step title="Current branch">
+    You are on the `main` branch
+  </Step>
+  
+  <Step title="Remote status">
+    Your branch is up to date with `origin/main`
+  </Step>
+  
+  <Step title="Modified files">
+    `README.md` has been modified but not staged
+  </Step>
+  
+  <Step title="Untracked files">
+    `new-file.txt` is a new file that hasn't been added to Git
+  </Step>
+  
+  <Step title="Staging area">
+    No changes have been added to the staging area for commit
+  </Step>
+</Steps>
+
+## When to Use `git status`
+
+### Before Committing
+
+Always run `git status` before committing to ensure:
+- You're on the correct branch
+- You know which files are staged
+- You understand what will be included in your commit
+
+<CodeGroup>
+```bash Check status
+git status
+```
+
+```bash Stage files
+git add file.txt
+```
+
+```bash Verify staging
+git status
+```
+
+```bash Commit
+git commit -m "descriptive message"
+```
+</CodeGroup>
+
+### After Making Changes
+
+After editing files, use `git status` to see:
+- Which files have been modified
+- Which files are untracked (new files)
+- Which files are staged for commit
+
+### Before Pushing
+
+Before pushing to a remote, check `git status` to:
+- Confirm you're on the right branch
+- See if your branch is ahead of the remote
+- Ensure all changes are committed
+
+### During Merge Conflicts
+
+During a merge conflict, `git status` will show you:
+- Which files have conflicts
+- Which files have been resolved
+- What stage you're at in the merge process
+
+```bash
+$ git status
+On branch main
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both modified:   index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+## Understanding the Output
+
+### Branch Information
+
+`git status` always starts by telling you which branch you're on:
+
+```bash
+On branch feature-branch
+```
+
+### Tracking Information
+
+If your branch tracks a remote branch, you'll see:
+
+```bash
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+```
+
+Or:
+
+```bash
+Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+```
+
+### File States
+
+Files can be in different states:
+
+1. **Untracked**: New files that Git isn't tracking yet
+2. **Modified**: Changed files that aren't staged
+3. **Staged**: Files ready to be committed
+4. **Unmerged**: Files with merge conflicts
+
+## Related Commands
+
+- [`git clone [url]`](/guides/git-clone): Clone (download) a repository that already exists on GitHub, including all of the files, branches, and commits
+- [`git remote -v`](/guides/git-remote): Show the associated remote repositories and their stored name, like `origin`
+- `git remote add origin <url>`: Add a remote so you can collaborate with others on a newly initialized repository
+- [`git push`](/guides/git-push): Uploads all local branch commits to the remote
+- `git push -u origin main`: When pushing a branch for the first time, this type of push will configure the relationship between the remote and your local repository
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Git Add" icon="plus" href="/guides/git-add">
+    Stage files shown in git status
+  </Card>
+  <Card title="Git Commit" icon="floppy-disk" href="/guides/git-commit">
+    Commit your staged changes
+  </Card>
+  <Card title="Git Push" icon="upload" href="/guides/git-push">
+    Push your commits to the remote
+  </Card>
+  <Card title="Git Pull" icon="download" href="/guides/git-pull">
+    Update your local branch
+  </Card>
+</CardGroup>

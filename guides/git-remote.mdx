@@ -1,0 +1,261 @@
+---
+title: git remote
+description: Manage the set of remotes that you are tracking with your local repository
+---
+
+There are some operations with `git remote`, like `git remote -v`, that you may use occasionally.
+
+<Note>
+The concept of a remote within Git is important and powers many of the other operations.
+</Note>
+
+## What does Git remote do?
+
+```bash
+git remote -v
+```
+
+`git remote` manages the set of remotes that you are tracking with your local repository.
+
+### Common `git remote` commands
+
+<CodeGroup>
+```bash List remotes
+git remote -v
+```
+
+```bash Add remote
+git remote add [name] [URL]
+```
+
+```bash Remove remote
+git remote remove [name]
+```
+
+```bash Rename remote
+git remote rename [old-name] [new-name]
+```
+</CodeGroup>
+
+- `git remote -v`: List the current remotes associated with the local repository
+- `git remote add [name] [URL]`: Add a remote
+- `git remote remove [name]`: Remove a remote
+- `git remote rename [old-name] [new-name]`: Rename a remote
+
+### What is `origin`?
+
+If you try running `git remote -v` in your repositories, you'll probably see something called `origin`. You may notice `origin` in many messages from Git.
+
+<Note>
+`origin` is the human-friendly name for the URL that the remote repository is stored at. It's like a key-value pair, and `origin` is the default.
+</Note>
+
+When you clone a repository, Git automatically creates a remote called `origin` that points to the original repository.
+
+```bash
+$ git remote -v
+origin  https://github.com/username/repository.git (fetch)
+origin  https://github.com/username/repository.git (push)
+```
+
+### What is `upstream`?
+
+You may need or want to work with multiple remotes for one local repository. This can be common in open source when a contributor needs to create a fork of a repository to have permission to push changes to the remote.
+
+In this case, it's common to create and clone a fork. Then, the default remote would be `origin`, in reference to the fork. To make it easier to pull any changes to update the local copy of the fork from the original repository, many people add the original repository as a remote also.
+
+<Tip>
+It's typical to name this remote `upstream`.
+</Tip>
+
+<Steps>
+  <Step title="Fork and clone">
+    Fork the repository on GitHub and clone your fork:
+    
+    ```bash
+    git clone https://github.com/your-username/repository.git
+    ```
+  </Step>
+  
+  <Step title="Add upstream remote">
+    Add the original repository as the upstream remote:
+    
+    ```bash
+    git remote add upstream https://github.com/original-owner/repository.git
+    ```
+  </Step>
+  
+  <Step title="Verify remotes">
+    ```bash
+    git remote -v
+    ```
+    
+    You should see both `origin` (your fork) and `upstream` (the original repository).
+  </Step>
+  
+  <Step title="Fetch from upstream">
+    You can now fetch changes from the original repository:
+    
+    ```bash
+    git fetch upstream
+    git merge upstream/main
+    ```
+  </Step>
+</Steps>
+
+## Communicating with the remote
+
+There are four commands within Git that prompt communication with the remote. Unless you are using one of these four commands, all of your work is only happening locally.
+
+<CardGroup cols={2}>
+  <Card title="git push" icon="upload">
+    Upload commits to the remote
+  </Card>
+  <Card title="git clone" icon="clone">
+    Clone a repository from the remote
+  </Card>
+  <Card title="git pull" icon="download">
+    Download and merge remote changes
+  </Card>
+  <Card title="git fetch" icon="arrows-rotate">
+    Download remote changes without merging
+  </Card>
+</CardGroup>
+
+- [`git push`](/guides/git-push): Upload commits to the remote
+- [`git clone`](/guides/git-clone): Clone a repository from the remote
+- [`git pull`](/guides/git-pull): Download and merge remote changes
+- `git fetch`: Download remote changes without merging
+
+## Branches and the remote
+
+The concept of branches can be confusing once it is combined with the concept of remotes. Git keeps track of the branches that you work on locally, as well as each of the branches in every remote associated with your local repo.
+
+### Remote tracking branches
+
+If you run `git branch --all` in your repository, you will notice a long list of branches. The branches that (by default) appear in red are the _remote tracking branches_.
+
+```bash
+$ git branch --all
+* main
+  feature-branch
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/main
+  remotes/origin/feature-branch
+  remotes/origin/old-feature
+```
+
+<Note>
+These branches are read-only copies of the branches on the remote. These update every time you run `git fetch` or `git pull`.
+</Note>
+
+These don't take up much room, so it's okay that Git does this by default. But, these will stack up over time – they are not deleted automatically.
+
+To delete the remote tracking branches that are deleted on the remote, run:
+
+```bash
+git fetch --prune
+```
+
+<Tip>
+This is safe to do if you are using GitHub, because branches merged via pull requests can be restored.
+</Tip>
+
+### Local working branches
+
+When you run `git branch --all`, you will also see the local working branches. These can be linked with branches on the remote, or they could exist with no remote counterpart.
+
+```bash
+$ git branch
+* main
+  feature-branch
+```
+
+The `*` indicates which branch you currently have checked out.
+
+## Examples
+
+### Adding a remote to an existing repository
+
+If you created a repository with `git init` and want to connect it to a remote:
+
+<Steps>
+  <Step title="Create remote repository">
+    Create a new repository on GitHub (don't initialize it with a README).
+  </Step>
+  
+  <Step title="Add the remote">
+    ```bash
+    git remote add origin https://github.com/username/repository.git
+    ```
+  </Step>
+  
+  <Step title="Verify the remote">
+    ```bash
+    git remote -v
+    ```
+  </Step>
+  
+  <Step title="Push to the remote">
+    ```bash
+    git push -u origin main
+    ```
+  </Step>
+</Steps>
+
+### Changing a remote URL
+
+If you need to change the URL of a remote (for example, switching from HTTPS to SSH):
+
+```bash
+git remote set-url origin git@github.com:username/repository.git
+```
+
+Verify the change:
+
+```bash
+git remote -v
+```
+
+### Working with multiple remotes
+
+You can have multiple remotes for a single repository:
+
+```bash
+# Add a second remote
+git remote add staging https://github.com/username/staging-repo.git
+
+# List all remotes
+git remote -v
+
+# Push to specific remote
+git push origin main
+git push staging main
+
+# Pull from specific remote
+git pull origin main
+```
+
+## Related Commands
+
+- [`git clone [url]`](/guides/git-clone): Clone (download) a repository that already exists on GitHub, including all of the files, branches, and commits
+- [`git status`](/guides/git-status): Always a good idea, this command shows you what branch you're on, what files are in the working or staging directory, and any other important information
+- [`git push`](/guides/git-push): Uploads all local branch commits to the remote
+- [`git pull`](/guides/git-pull): Updates your current local working branch with all new commits from the corresponding remote branch on GitHub. `git pull` is a combination of `git fetch` and `git merge`
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Git Push" icon="upload" href="/guides/git-push">
+    Push changes to your remote repository
+  </Card>
+  <Card title="Git Pull" icon="download" href="/guides/git-pull">
+    Pull changes from the remote
+  </Card>
+  <Card title="Git Clone" icon="clone" href="/guides/git-clone">
+    Clone a remote repository
+  </Card>
+  <Card title="Git Init" icon="folder-plus" href="/guides/git-init">
+    Initialize a new repository
+  </Card>
+</CardGroup>

@@ -1,0 +1,186 @@
+---
+title: Introduction
+description: Welcome to the GitHub Training Kit - your comprehensive resource for mastering Git and GitHub
+mode: custom
+---
+
+<div className="relative overflow-hidden bg-gradient-to-br from-[#24292f] via-[#1a1d27] to-[#0d1117] py-20">
+  <div className="max-w-6xl mx-auto px-6 lg:px-8">
+    <div className="lg:grid lg:grid-cols-12 lg:gap-8 items-center">
+      <div className="lg:col-span-7">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+          GitHub Training Kit
+        </h1>
+        <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mb-8">
+          Open source courseware for Git and GitHub. Learn version control with comprehensive guides, cheat sheets, and training materials from GitHub's Professional Services team.
+        </p>
+        <div className="flex flex-wrap gap-4">
+          <a
+            href="/quickstart"
+            className="inline-flex items-center px-6 py-3 bg-white text-[#24292f] font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            Get Started
+            <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a
+            href="/cheatsheets/git-cheatsheet"
+            className="inline-flex items-center px-6 py-3 border border-white/30 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-colors"
+          >
+            View Cheat Sheets
+          </a>
+        </div>
+      </div>
+      <div className="hidden lg:block lg:col-span-5 mt-12 lg:mt-0">
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#6e7781]/20 to-transparent rounded-2xl blur-3xl"></div>
+          <div className="relative bg-[#1a1d27] border border-[#27272a] rounded-2xl p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            <pre className="text-sm text-gray-300 overflow-x-auto">
+              <code>{`$ git init
+Initialized empty Git repository
+
+$ git add .
+$ git commit -m "Initial commit"
+[main (root-commit) a1b2c3d] Initial commit
+
+$ git remote add origin github.com/...
+$ git push -u origin main`}</code>
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div className="mt-16 mb-16 max-w-5xl mx-auto px-6">
+  <div className="text-center mb-12">
+    <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+      Everything you need to master Git
+    </h2>
+    <p className="text-lg text-gray-600 dark:text-gray-400">
+      From basic commands to advanced workflows, we've got you covered
+    </p>
+  </div>
+
+  <CardGroup cols={3}>
+    <Card title="Git Guides" icon="book-open" href="/guides/git-overview">
+      Step-by-step guides covering essential Git commands and workflows
+    </Card>
+    <Card title="Cheat Sheets" icon="sheet-plastic" href="/cheatsheets/git-cheatsheet">
+      Quick reference guides for Git and Bash commands in 25+ languages
+    </Card>
+    <Card title="Advanced Topics" icon="graduation-cap" href="/advanced/submodules-vs-subtrees">
+      Deep dive into submodules, subtrees, and SVN migration strategies
+    </Card>
+  </CardGroup>
+</div>
+
+<div className="mt-16 mb-16 max-w-5xl mx-auto px-6">
+  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+    Core Git Commands
+  </h2>
+  <p className="text-base text-gray-600 dark:text-gray-400 mb-8">
+    Master the fundamental Git commands that every developer needs
+  </p>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <a href="/guides/git-init" className="group block rounded-xl border border-gray-200 dark:border-[#27272a] bg-white dark:bg-[#1a1d27] p-6 hover:border-[#24292f] dark:hover:border-[#6e7781] transition-colors no-underline">
+      <div className="flex items-start justify-between">
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">git init</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Initialize a new Git repository</p>
+        </div>
+        <svg className="w-5 h-5 text-gray-400 group-hover:text-[#24292f] dark:group-hover:text-[#6e7781] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </div>
+    </a>
+
+    <a href="/guides/git-clone" className="group block rounded-xl border border-gray-200 dark:border-[#27272a] bg-white dark:bg-[#1a1d27] p-6 hover:border-[#24292f] dark:hover:border-[#6e7781] transition-colors no-underline">
+      <div className="flex items-start justify-between">
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">git clone</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Clone a repository from a remote source</p>
+        </div>
+        <svg className="w-5 h-5 text-gray-400 group-hover:text-[#24292f] dark:group-hover:text-[#6e7781] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </div>
+    </a>
+
+    <a href="/guides/git-add" className="group block rounded-xl border border-gray-200 dark:border-[#27272a] bg-white dark:bg-[#1a1d27] p-6 hover:border-[#24292f] dark:hover:border-[#6e7781] transition-colors no-underline">
+      <div className="flex items-start justify-between">
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">git add</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Stage files for commit</p>
+        </div>
+        <svg className="w-5 h-5 text-gray-400 group-hover:text-[#24292f] dark:group-hover:text-[#6e7781] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </div>
+    </a>
+
+    <a href="/guides/git-commit" className="group block rounded-xl border border-gray-200 dark:border-[#27272a] bg-white dark:bg-[#1a1d27] p-6 hover:border-[#24292f] dark:hover:border-[#6e7781] transition-colors no-underline">
+      <div className="flex items-start justify-between">
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">git commit</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Record changes to the repository</p>
+        </div>
+        <svg className="w-5 h-5 text-gray-400 group-hover:text-[#24292f] dark:group-hover:text-[#6e7781] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </div>
+    </a>
+
+    <a href="/guides/git-push" className="group block rounded-xl border border-gray-200 dark:border-[#27272a] bg-white dark:bg-[#1a1d27] p-6 hover:border-[#24292f] dark:hover:border-[#6e7781] transition-colors no-underline">
+      <div className="flex items-start justify-between">
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">git push</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Upload local commits to a remote repository</p>
+        </div>
+        <svg className="w-5 h-5 text-gray-400 group-hover:text-[#24292f] dark:group-hover:text-[#6e7781] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </div>
+    </a>
+
+    <a href="/guides/git-pull" className="group block rounded-xl border border-gray-200 dark:border-[#27272a] bg-white dark:bg-[#1a1d27] p-6 hover:border-[#24292f] dark:hover:border-[#6e7781] transition-colors no-underline">
+      <div className="flex items-start justify-between">
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">git pull</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Fetch and integrate changes from a remote repository</p>
+        </div>
+        <svg className="w-5 h-5 text-gray-400 group-hover:text-[#24292f] dark:group-hover:text-[#6e7781] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div className="mt-16 mb-16 max-w-5xl mx-auto px-6">
+  <div className="bg-gradient-to-r from-[#24292f] to-[#1a1d27] rounded-2xl p-8 lg:p-12 text-center">
+    <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+      Ready to get started?
+    </h2>
+    <p className="text-lg text-gray-300 mb-6 max-w-2xl mx-auto">
+      Begin your Git journey with our quickstart guide and learn the essential workflows
+    </p>
+    <a
+      href="/quickstart"
+      className="inline-flex items-center px-6 py-3 bg-white text-[#24292f] font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+    >
+      Start Learning
+      <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,283 @@
+---
+title: Git & GitHub Fundamentals
+description: Essential Git concepts, terminology, and workflows for effective version control and collaboration on GitHub
+---
+
+Git is an open source, distributed version control system founded in command line interaction. This guide provides the day-to-day setup and commands to use Git locally and connect repositories to GitHub for a complete collaboration workflow.
+
+## Understanding Git and GitHub Terms
+
+With a language all its own, this quick guide to common terms of GitHub and Git will have you collaborating in no time.
+
+### Repository
+
+A repository is the most basic element of Git and GitHub. Imagine it as a project's folder. A repository contains all of the project files (including documentation), and stores each file's revision history.
+
+<Note>
+Repositories can be public (visible to everyone) or private (visible only to you and people you explicitly share access with).
+</Note>
+
+### Commit
+
+An individual change to a file (or set of files). With Git, every time you save it creates a unique ID (a.k.a. the "SHA" or "hash") that allows you to keep record of what changes were made when and by who. Commits usually contain a commit message which is a brief description of the changes made.
+
+**Key characteristics of commits:**
+- Each commit has a unique identifier (SHA hash)
+- Commits are immutable once created
+- Commits form a directed acyclic graph (DAG) representing your project history
+- Good commit messages help your team understand the evolution of the codebase
+
+### Branch
+
+A parallel version of a repository. It is contained within the repository, but does not affect the main branch, allowing you to work freely without disrupting the "live" version.
+
+<Note>
+Branches in Git are lightweight and cheap to create. This makes Git's branching model one of its most powerful features.
+</Note>
+
+### Remote
+
+The connection of a local repository with one on GitHub. It permits revision history to be synchronized by publishing local commits and downloading any new changes from GitHub.
+
+**Common remote names:**
+- `origin` - The default name for your primary remote repository
+- `upstream` - Often used for the original repository when you've forked a project
+
+### Pull Request
+
+A feature on GitHub which provides conversation, line-by-line code review, change history analysis, and summaries of modified files.
+
+<Note>
+Pull requests are a GitHub feature, not a Git feature. They enable collaboration and code review before merging changes into the main branch.
+</Note>
+
+## Configuring Git
+
+The first thing to setup when using Git is two important fields about the user. This allows appropriate credit and traceability for project contributions.
+
+```bash
+git config --global user.name "Mona Lisa Octocat"
+git config --global user.email "mona@github.com"
+```
+
+<Warning>
+Make sure to use the email address associated with your GitHub account to ensure your commits are properly attributed to you.
+</Warning>
+
+### Additional Useful Configuration
+
+```bash
+# Set your default branch name to 'main'
+git config --global init.defaultBranch main
+
+# Enable color output
+git config --global color.ui auto
+
+# Set your default editor (example: VS Code)
+git config --global core.editor "code --wait"
+```
+
+## Versioning Files
+
+Versioning files begins by creating a repository on your GitHub account. File authoring and editing can be performed through the web interface or by acquiring the repository locally from the command line.
+
+### Cloning a Repository
+
+```bash
+git clone [url] [project-name]
+cd [project-name]
+```
+
+The `clone` command:
+- Downloads the entire repository history
+- Creates a new directory with the project name
+- Automatically sets up the `origin` remote
+- Checks out the default branch
+
+### Making Changes with Branches
+
+Repository contributions are commonly made through branches and commits focused on small pieces of work.
+
+```bash
+# Create a new branch
+git branch [name]
+
+# Switch to the branch
+git switch [name]
+
+# Stage files for commit
+git add [file]
+
+# Commit the changes
+git commit -m "[commit message]"
+```
+
+<Note>
+You can combine branch creation and switching with: `git switch -c [name]`
+</Note>
+
+### Completing the Work
+
+When the feature work reaches completion, the branch can be merged locally or pushed to GitHub for code review.
+
+```bash
+# Merge locally
+git switch main
+git merge [branch]
+
+# Push to GitHub for code review
+git push -u origin [branch]
+```
+
+### Checking Status and Changes
+
+As commits can be efficiently made, the state of any new, modified, or missing files can be verified and quickly validated.
+
+```bash
+# Check working tree status
+git status
+
+# View changes in a specific file
+git diff [modified-file]
+
+# View staged changes
+git diff --staged
+```
+
+## Integrating Changes
+
+Commits can be made against any branch and in any order. Commonly, this is performed against the main branch as means of feature or bug-fix integration.
+
+```bash
+# Switch to main branch
+git switch main
+
+# Merge feature branch
+git merge feature-enhancement
+
+# Delete the feature branch (optional)
+git branch -d feature-enhancement
+```
+
+<Note>
+Merges result in all commit history becoming traversable, and eliminating the need for the branch label to remain. The `-d` flag safely deletes branches that have been fully merged.
+</Note>
+
+## Sharing and Retrieving Changes
+
+### Setting Up a Remote
+
+Sharing commit history requires only a destination repository, one on GitHub, and a single setup step.
+
+```bash
+# Add a remote repository
+git remote add origin [repo-url]
+
+# Verify the remote
+git remote -v
+```
+
+The `origin` remote is the traditional name for the primary remote repository, but you can use any name you prefer.
+
+### Pushing Changes
+
+With a remote setup, and the traditional name of "origin" aliased to the URL, publishing local commits is simple.
+
+```bash
+git push origin [branch-name]
+
+# For the first push of a new branch, use -u to set upstream tracking
+git push -u origin [branch-name]
+```
+
+<Warning>
+Always ensure you're on the correct branch before pushing. Use `git status` to verify your current branch.
+</Warning>
+
+### Pulling Changes
+
+Retrieving changes from a shared repository and automatically merging in any new commits locally is performed in a multi-step operation run by one command.
+
+```bash
+# Switch to the target branch
+git switch [target-branch]
+
+# Pull and merge changes
+git pull origin [upstream-branch]
+```
+
+**What `git pull` does:**
+1. Fetches changes from the remote repository (`git fetch`)
+2. Merges those changes into your current branch (`git merge`)
+
+<Note>
+You can also use `git fetch` followed by `git merge` separately if you want to review changes before merging them.
+</Note>
+
+## Common Workflows
+
+### Feature Branch Workflow
+
+1. Create a new branch for your feature
+2. Make changes and commit them
+3. Push the branch to GitHub
+4. Open a pull request
+5. Review and merge the pull request
+6. Delete the feature branch
+
+```bash
+git switch -c feature-new-login
+git add .
+git commit -m "Add new login functionality"
+git push -u origin feature-new-login
+# Open pull request on GitHub
+# After merge:
+git switch main
+git pull origin main
+git branch -d feature-new-login
+```
+
+### Keeping Your Branch Up to Date
+
+```bash
+# Switch to main and pull latest changes
+git switch main
+git pull origin main
+
+# Switch back to your feature branch
+git switch feature-branch
+
+# Merge main into your feature branch
+git merge main
+```
+
+## Best Practices
+
+<Warning>
+**Important Guidelines:**
+
+- Commit often with meaningful messages
+- Pull before you push to avoid conflicts
+- Use branches for all new features and bug fixes
+- Never commit sensitive information (passwords, API keys, etc.)
+- Review your changes with `git diff` before committing
+</Warning>
+
+### Writing Good Commit Messages
+
+Good commit messages help your team understand the evolution of the codebase:
+
+- Use the imperative mood ("Add feature" not "Added feature")
+- Keep the first line under 50 characters
+- Provide additional context in the body if needed
+- Reference issue numbers when applicable
+
+**Example:**
+```
+Add user authentication with OAuth
+
+Implements OAuth 2.0 authentication flow for users.
+Includes token refresh logic and session management.
+
+Fixes #123
+```

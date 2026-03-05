@@ -1,0 +1,191 @@
+---
+title: Git Cheat Sheet
+description: Quick reference guide for commonly used Git command line instructions for version control and GitHub workflows
+---
+
+Git is the open source distributed version control system that facilitates GitHub activities on your laptop or desktop. This cheat sheet summarizes commonly used Git command line instructions for quick reference.
+
+<Note>
+  This cheat sheet is available in 25+ languages. Visit [github.com/github/training-kit](https://github.com/github/training-kit/tree/master/downloads) to access translations.
+</Note>
+
+## Installation
+
+### GitHub Desktop
+For a graphical interface, download GitHub Desktop at [desktop.github.com](https://desktop.github.com)
+
+### Git for All Platforms
+Download the command-line tool at [git-scm.com](https://git-scm.com)
+
+## Configure Tooling
+
+Configure user information for all local repositories.
+
+<AccordionGroup>
+  <Accordion title="Set your name">
+    ```bash
+    git config --global user.name "[name]"
+    ```
+    Sets the name you want attached to your commit transactions
+  </Accordion>
+
+  <Accordion title="Set your email">
+    ```bash
+    git config --global user.email "[email address]"
+    ```
+    Sets the email you want attached to your commit transactions
+  </Accordion>
+
+  <Accordion title="Enable colorization">
+    ```bash
+    git config --global color.ui auto
+    ```
+    Enables helpful colorization of command line output
+  </Accordion>
+</AccordionGroup>
+
+## Branches
+
+Branches are an important part of working with Git. Any commits you make will be made on the branch you're currently "checked out" to. Use `git status` to see which branch that is.
+
+| Command | Description |
+|---------|-------------|
+| `git branch [branch-name]` | Creates a new branch |
+| `git switch -c [branch-name]` | Switches to the specified branch and updates the working directory |
+| `git merge [branch]` | Combines the specified branch's history into the current branch. This is usually done in pull requests, but is an important Git operation. |
+| `git branch -d [branch-name]` | Deletes the specified branch |
+
+## Create Repositories
+
+A new repository can either be created locally, or an existing repository can be cloned. When a repository was initialized locally, you have to push it to GitHub afterwards.
+
+<AccordionGroup>
+  <Accordion title="Initialize a new repository">
+    ```bash
+    git init
+    ```
+    The `git init` command turns an existing directory into a new Git repository inside the folder you are running this command. After using the `git init` command, link the local repository to an empty GitHub repository using the following command:
+    
+    ```bash
+    git remote add origin [url]
+    ```
+    Specifies the remote repository for your local repository. The url points to a repository on GitHub.
+  </Accordion>
+
+  <Accordion title="Clone an existing repository">
+    ```bash
+    git clone [url]
+    ```
+    Clone (download) a repository that already exists on GitHub, including all of the files, branches, and commits
+  </Accordion>
+</AccordionGroup>
+
+## The .gitignore File
+
+Sometimes it may be a good idea to exclude files from being tracked with Git. This is typically done in a special file named `.gitignore`. You can find helpful templates for `.gitignore` files at [github.com/github/gitignore](https://github.com/github/gitignore).
+
+## Synchronize Changes
+
+Synchronize your local repository with the remote repository on GitHub.com
+
+| Command | Description |
+|---------|-------------|
+| `git fetch` | Downloads all history from the remote tracking branches |
+| `git merge` | Combines remote tracking branches into current local branch |
+| `git push` | Uploads all local branch commits to GitHub |
+| `git pull` | Updates your current local working branch with all new commits from the corresponding remote branch on GitHub. `git pull` is a combination of `git fetch` and `git merge` |
+
+## Make Changes
+
+Browse and inspect the evolution of project files.
+
+<AccordionGroup>
+  <Accordion title="View history">
+    ```bash
+    git log
+    ```
+    Lists version history for the current branch
+    
+    ```bash
+    git log --follow [file]
+    ```
+    Lists version history for a file, beyond renames (works only for a single file)
+  </Accordion>
+
+  <Accordion title="Compare changes">
+    ```bash
+    git diff [first-branch]...[second-branch]
+    ```
+    Shows content differences between two branches
+    
+    ```bash
+    git show [commit]
+    ```
+    Outputs metadata and content changes of the specified commit
+  </Accordion>
+
+  <Accordion title="Stage and commit">
+    ```bash
+    git add [file]
+    ```
+    Snapshots the file in preparation for versioning
+    
+    ```bash
+    git commit -m "[descriptive message]"
+    ```
+    Records file snapshots permanently in version history
+  </Accordion>
+</AccordionGroup>
+
+## Redo Commits
+
+Erase mistakes and craft replacement history.
+
+<Warning>
+  **CAUTION!** Changing history can have nasty side effects. If you need to change commits that exist on GitHub (the remote), proceed with caution. If you need help, reach out at [github.community](https://github.community) or contact support.
+</Warning>
+
+| Command | Description |
+|---------|-------------|
+| `git reset [commit]` | Undoes all commits after `[commit]`, preserving changes locally |
+| `git reset --hard [commit]` | Discards all history and changes back to the specified commit |
+
+## Glossary
+
+<AccordionGroup>
+  <Accordion title="git">
+    An open source, distributed version-control system
+  </Accordion>
+
+  <Accordion title="GitHub">
+    A platform for hosting and collaborating on Git repositories
+  </Accordion>
+
+  <Accordion title="commit">
+    A Git object, a snapshot of your entire repository compressed into a SHA
+  </Accordion>
+
+  <Accordion title="branch">
+    A lightweight movable pointer to a commit
+  </Accordion>
+
+  <Accordion title="clone">
+    A local version of a repository, including all commits and branches
+  </Accordion>
+
+  <Accordion title="remote">
+    A common repository on GitHub that all team members use to exchange their changes
+  </Accordion>
+
+  <Accordion title="fork">
+    A copy of a repository on GitHub owned by a different user
+  </Accordion>
+
+  <Accordion title="pull request">
+    A place to compare and discuss the differences introduced on a branch with reviews, comments, integrated tests, and more
+  </Accordion>
+
+  <Accordion title="HEAD">
+    Representing your current working directory, the HEAD pointer can be moved to different branches, tags, or commits when using `git switch`
+  </Accordion>
+</AccordionGroup>

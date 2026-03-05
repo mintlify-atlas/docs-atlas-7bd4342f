@@ -1,80 +1,274 @@
 ---
-title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+title: 'Quickstart Guide'
+description: 'Get started with Git and GitHub in minutes. Learn the essential workflow for version control and collaboration.'
 ---
 
-## Get started in three steps
+## Welcome to Git and GitHub
 
-Get your documentation site running locally and make your first customization.
-
-### Step 1: Set up your local environment
-
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
-
-### Step 2: Deploy your changes
-
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
-
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
-
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
-
-### Step 3: Go live
-
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
-
-## Next steps
-
-Now that you have your docs running, explore these key features:
-
-<CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
-</CardGroup>
+This quickstart guide will walk you through the fundamental Git workflow, from installing Git to making your first commits and collaborating with others. By the end of this guide, you'll understand how to create branches, make commits, and sync your work with GitHub.
 
 <Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
+Git is a distributed version control system that saves changes over time without overwriting previous versions. Every developer working with a Git repository has a copy of that entire repository – every commit, every branch, every file.
 </Note>
+
+## What You'll Learn
+
+In this guide, you'll learn how to:
+- Configure Git on your local machine
+- Create and work with branches
+- Make commits to track your changes
+- Push your work to GitHub and collaborate with others
+
+<Steps>
+
+<Step title="Install and Configure Git">
+
+First, install Git on your system. Download the appropriate version for your platform:
+
+- **GitHub Desktop**: [desktop.github.com](https://desktop.github.com)
+- **Git for All Platforms**: [git-scm.com](https://git-scm.com)
+
+After installation, configure your user information for all local repositories:
+
+```bash
+git config --global user.name "[name]"
+```
+
+This sets the name you want attached to your commit transactions.
+
+```bash
+git config --global user.email "[email address]"
+```
+
+This sets the email you want attached to your commit transactions.
+
+```bash
+git config --global color.ui auto
+```
+
+This enables helpful colorization of command line output.
+
+<Tip>
+Use `git config --list` to verify your configuration settings.
+</Tip>
+
+</Step>
+
+<Step title="Create or Clone a Repository">
+
+You have two options to start working with Git:
+
+**Option 1: Clone an existing repository**
+
+```bash
+git clone [url]
+```
+
+Clone (download) a repository that already exists on GitHub, including all of the files, branches, and commits.
+
+**Option 2: Initialize a new repository locally**
+
+```bash
+git init
+```
+
+The `git init` command turns an existing directory into a new Git repository. After using this command, link the local repository to an empty GitHub repository:
+
+```bash
+git remote add origin [url]
+```
+
+This specifies the remote repository for your local repository. The URL points to a repository on GitHub.
+
+<Note>
+Use `git remote -v` to show the associated remote repositories and their stored name, like `origin`.
+</Note>
+
+</Step>
+
+<Step title="Create a Branch and Make Changes">
+
+Branches are lightweight and cheap in Git, making them perfect for safe experimentation. The main branch is usually called `main`. Create a new branch to work on features or fixes:
+
+```bash
+git branch [branch-name]
+```
+
+Creates a new branch. We recommend naming branches based on the function or feature that will be the focus of this branch.
+
+```bash
+git switch -c [branch-name]
+```
+
+Switches to the specified branch and updates the working directory.
+
+<Tip>
+Always check which branch you're on with `git status`. This command shows you what branch you're on, what files are in the working or staging directory, and any other important information.
+</Tip>
+
+Now make your changes using your favorite text editor or IDE. When you're ready to save your work:
+
+```bash
+git add [file]
+```
+
+Snapshots the file in preparation for versioning, adding it to the staging area.
+
+```bash
+git commit -m "[descriptive message]"
+```
+
+Records file snapshots permanently in version history.
+
+<Note>
+Commits are immutable, meaning they can't be changed. This creates a safer environment where you can be braver, trusting that Git has your back. If you make a mistake, you can easily revert that change or roll back to where everything was fine.
+</Note>
+
+</Step>
+
+<Step title="Push Your Changes to GitHub">
+
+So far, if you've made a commit locally, you're the only one that can see it. To let others see your work and begin collaboration, push your changes:
+
+```bash
+git push
+```
+
+Uploads all local branch commits to GitHub.
+
+If you're pushing from a branch for the first time that you've created locally, you'll need to give Git more information:
+
+```bash
+git push -u origin [branch-name]
+```
+
+This tells Git to push the current branch and create a branch on the remote that matches it with the same name – and also create a relationship with that branch so that `git push` will be enough in the future.
+
+<Tip>
+If there has been a new commit on the branch on the remote, you may be blocked from pushing. Start with `git pull` to incorporate the changes on the remote into your own local branch, resolve any conflicts, and then try the push again.
+</Tip>
+
+</Step>
+
+<Step title="Sync Changes from the Remote">
+
+To keep your local repository up to date with changes from GitHub:
+
+```bash
+git fetch
+```
+
+Downloads all history from the remote tracking branches.
+
+```bash
+git pull
+```
+
+Updates your current local working branch with all new commits from the corresponding remote branch on GitHub. `git pull` is a combination of `git fetch` and `git merge`.
+
+<Note>
+By default, `git push` only pushes the branch that you've currently checked out to, keeping your other branches unaffected.
+</Note>
+
+</Step>
+
+<Step title="Collaborate with Pull Requests">
+
+When you're ready to merge your work, open a pull request on GitHub. A pull request is a comparison of two branches – typically `main` and your feature branch.
+
+Pull requests are the powerhouse of GitHub:
+- Integrated tests can automatically run on pull requests, giving you immediate feedback
+- Peers can give detailed code reviews
+- You can collaborate and iterate on your work before merging
+
+Once you and your team decide that the pull request looks good, you can merge it. By merging, you integrate the feature branch into `main`. Then, `main` will be updated with your changes.
+
+<Tip>
+Pull requests should be opened when work is beginning, not when it's finished! The earlier you open a pull request, the more visibility the entire team has to the work you're doing.
+</Tip>
+
+After merging, don't forget to delete your branch. Remember, branches are lightweight and cheap – create a new one when you need it based on the most recent commit on the `main` branch.
+
+</Step>
+
+</Steps>
+
+## Essential Git Commands Reference
+
+Here are the most important commands you'll use regularly:
+
+<CodeGroup>
+
+```bash Status and Inspection
+# Check your current branch and file status
+git status
+
+# View commit history
+git log
+
+# Show associated remote repositories
+git remote -v
+```
+
+```bash Branching
+# List all branches
+git branch
+
+# Create a new branch
+git branch [branch-name]
+
+# Switch to a branch
+git switch -c [branch-name]
+
+# Delete a branch
+git branch -d [branch-name]
+```
+
+```bash Making Changes
+# Stage a file for commit
+git add [file]
+
+# Commit staged changes
+git commit -m "[descriptive message]"
+
+# View differences between branches
+git diff [first-branch]...[second-branch]
+```
+
+```bash Synchronizing
+# Download changes from remote
+git fetch
+
+# Pull changes from remote
+git pull
+
+# Push changes to remote
+git push
+```
+
+</CodeGroup>
+
+## Next Steps
+
+Now that you understand the basic Git workflow, explore these guides to deepen your knowledge:
+
+- Learn more about [Git concepts and workflows](/guides/git-overview)
+- Understand [Git commits](/guides/git-commit) and version history
+- Explore [advanced Git topics](/advanced/submodules-vs-subtrees) including submodules and subtrees
+- Master [Git commands](/cheatsheets/git-cheatsheet) with our comprehensive cheat sheets
+
+<Tip>
+Practice makes perfect! The best place to practice using Git and GitHub is the [Introduction to GitHub Learning Lab course](https://lab.github.com/githubtraining/introduction-to-github).
+</Tip>
+
+## Why Git and GitHub Matter
+
+**Speed**: Git uses SHA compression, which makes it very fast.
+
+**Safe Collaboration**: Git can handle merge conflicts, which means it's OK for multiple people to work on the same file at the same time.
+
+**Cheap Branches**: By using branches, developers can make changes in a safe sandbox without affecting production code.
+
+**Ease of Roll Back**: If you make a mistake, it's OK! You can easily revert changes or roll back to any previous commit.
+
+Version control is essential – without it, you risk losing your work. With Git, you can make a "commit" as often as you'd like, and you can always go back to previous commits. This takes the pressure off while you're working. Commit often and commit early, and you'll never have that gut-sinking feeling of overwriting or losing changes.

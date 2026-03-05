@@ -1,0 +1,212 @@
+---
+title: git init
+description: Transform any directory into a Git repository with git init
+---
+
+```bash
+git init
+```
+
+`git init` turns any directory into a Git repository.
+
+## What Does `git init` Do?
+
+`git init` is one way to start a new project with Git. To start a repository, use either `git init` or `git clone` – not both.
+
+<Note>
+To initialize a repository, Git creates a hidden directory called `.git`. That directory stores all of the objects and refs that Git uses and creates as a part of your project's history. This hidden `.git` directory is what separates a regular directory from a Git repository.
+</Note>
+
+## How to Use `git init`
+
+### Common usages and options for `git init`
+
+<CodeGroup>
+```bash Transform current directory
+git init
+```
+
+```bash Transform specific directory
+git init <directory>
+```
+
+```bash Create bare repository
+git init --bare
+```
+</CodeGroup>
+
+- `git init`: Transform the current directory into a Git repository
+- `git init <directory>`: Transform a directory in the current path into a Git repository
+- `git init --bare`: Create a new bare repository (a repository to be used as a remote repository only, that won't contain active development)
+
+<Tip>
+You can see all of the options with `git init` in [git-scm's documentation](https://git-scm.com/docs/git-init).
+</Tip>
+
+## Examples of `git init`
+
+### `git init` vs `git clone`
+
+Starting a new project can be confusing. Sometimes, it's unclear if you should use `git init`, `git clone`, or both.
+
+#### `git init`: One Person Starting a New Repository Locally
+
+Your project may already exist locally, but it doesn't have Git yet. `git init` is probably the right choice for you. This is only run once, even if other collaborators share the project.
+
+<Steps>
+  <Step title="Initialize the repository">
+    ```bash
+    git init
+    ```
+  </Step>
+  
+  <Step title="Create a remote repository">
+    Create a remote repository somewhere like GitHub.com.
+  </Step>
+  
+  <Step title="Add the remote URL">
+    Add the remote URL to your local git repository:
+    
+    ```bash
+    git remote add origin <URL>
+    ```
+    
+    This stores the remote URL under a more human-friendly name, `origin`.
+  </Step>
+  
+  <Step title="Stage and commit files">
+    Shape your history into at least one commit:
+    
+    ```bash
+    git add .
+    git commit -m "Initial commit"
+    ```
+  </Step>
+  
+  <Step title="Push to remote">
+    Once you have at least one commit, push to the remote and set up the tracking relationship:
+    
+    ```bash
+    git push -u origin main
+    ```
+  </Step>
+</Steps>
+
+#### `git clone`: The Remote Already Exists
+
+If the repository already exists on a remote, you would choose to `git clone` and _not_ `git init`.
+
+<Note>
+If you create a remote repository first with the intent of moving your project to it later:
+- If there are **no commits** in the remote repository, follow the steps above for `git init`
+- If there are **commits and files** in the remote repository but you want it to contain your project files, `git clone` that repository, then move the project's files into that cloned repository. Use `git add`, `git commit`, and `git push` to create a history that makes sense for the beginning of your project.
+</Note>
+
+### `git init` Existing Folder
+
+The default behavior of `git init` is to transform the current directory into a Git repository.
+
+<CodeGroup>
+```bash Current directory
+# Navigate to your project directory
+cd my-project
+
+# Initialize Git repository
+git init
+```
+
+```bash Specific directory
+# Initialize a specific directory
+git init my-project
+```
+</CodeGroup>
+
+For an existing project to become a Git repository, navigate into the targeted root directory, then run `git init`.
+
+Or, you can create a new repository in a directory in your current path using `git init <directory>`.
+
+## `git init` Gone Wrong
+
+### `git init` in the wrong directory
+
+Running `git init` in the wrong place will create unintended repositories. You may have noticed strange error messages when using Git. Maybe you suspect that another parent directory is also a Git repository.
+
+<Steps>
+  <Step title="Check if current directory is tracked">
+    Use `git status` to see if the current directory is tracked by Git:
+    
+    ```bash
+    git status
+    ```
+  </Step>
+  
+  <Step title="Look for the .git directory">
+    If it is tracked, run `ls -al` and look for an otherwise hidden `.git` directory:
+    
+    ```bash
+    ls -al
+    ```
+  </Step>
+  
+  <Step title="Navigate up if needed">
+    If you don't see it, navigate one level up:
+    
+    ```bash
+    cd ..
+    git status
+    ls -al
+    ```
+    
+    Repeat this until you find the `.git` directory.
+  </Step>
+  
+  <Step title="Remove the .git directory">
+    Once you find the `.git` directory and are sure you don't want that to be a Git repository:
+    
+    ```bash
+    rm -rf .git
+    ```
+    
+    <Warning>
+    This will remove the `.git` directory, effectively un-initializing that repository. Make sure you're in the correct directory before running this command!
+    </Warning>
+  </Step>
+  
+  <Step title="Verify Git is no longer tracking">
+    Run `git status` again to confirm that Git is no longer tracking these files:
+    
+    ```bash
+    git status
+    ```
+    
+    It could be possible that multiple layers of `.git` directories are present.
+  </Step>
+</Steps>
+
+Return to your working repository, the one that you _expect_ to be under version control. Things should be working as expected.
+
+## Related Commands
+
+- [`git clone [url]`](/guides/git-clone): Clone (download) a repository that already exists on GitHub, including all of the files, branches, and commits
+- [`git status`](/guides/git-status): Always a good idea, this command shows you what branch you're on, what files are in the working or staging directory, and any other important information
+- [`git remote -v`](/guides/git-remote): Show the associated remote repositories and their stored name, like `origin`
+- `git remote add origin <url>`: Add a remote so you can collaborate with others on a newly initialized repository
+- [`git push`](/guides/git-push): Uploads all local branch commits to the remote
+- `git push -u origin main`: When pushing a branch for the first time, this type of push will configure the relationship between the remote and your local repository
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Git Add" icon="plus" href="/guides/git-add">
+    Stage files for your first commit
+  </Card>
+  <Card title="Git Commit" icon="floppy-disk" href="/guides/git-commit">
+    Create your first commit
+  </Card>
+  <Card title="Git Remote" icon="server" href="/guides/git-remote">
+    Learn about working with remotes
+  </Card>
+  <Card title="Git Push" icon="upload" href="/guides/git-push">
+    Push your changes to a remote repository
+  </Card>
+</CardGroup>

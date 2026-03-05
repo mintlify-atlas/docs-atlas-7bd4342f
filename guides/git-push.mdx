@@ -1,0 +1,254 @@
+---
+title: git push
+description: Upload your local branch commits to the remote repository with git push
+---
+
+```bash
+git push
+```
+
+`git push` uploads all local branch commits to the corresponding remote branch.
+
+## What Does `git push` Do?
+
+`git push` updates the remote branch with local commits. It is one of the four commands in Git that prompts interaction with the remote repository. You can also think of `git push` as _update_ or _publish_.
+
+<Note>
+By default, `git push` only updates the corresponding branch on the remote. So, if you are checked out to the `main` branch when you execute `git push`, then only the `main` branch will be updated.
+</Note>
+
+<Tip>
+It's always a good idea to use `git status` to see what branch you are on before pushing to the remote.
+</Tip>
+
+## How to Use `git push`
+
+After you make and commit changes locally, you can share them with the remote repository using `git push`. Pushing changes to the remote makes your commits accessible to others who you may be collaborating with. This will also update any open pull requests with the branch that you're working on.
+
+<Warning>
+As best practice, it's important to run the `git pull` command before you push any new changes to the remote branch. This will update your local branch with any new changes that may have been pushed to the remote from other contributors. Pulling before you push can reduce the amount of merge conflicts you create on GitHub – allowing you to resolve them locally before pushing your changes to the remote branch.
+</Warning>
+
+### Common usages and options for `git push`
+
+<CodeGroup>
+```bash Push to remote
+git push
+```
+
+```bash Force push
+git push -f
+```
+
+```bash Set upstream
+git push -u origin [branch]
+```
+
+```bash Push all branches
+git push --all
+```
+
+```bash Push tags
+git push --tags
+```
+</CodeGroup>
+
+- `git push`: Push the current branch to its default remote branch
+- `git push -f`: Force a push that would otherwise be blocked, usually because it will delete or overwrite existing commits *(Use with caution!)*
+- `git push -u origin [branch]`: Useful when pushing a new branch, this creates an upstream tracking branch with a lasting relationship to your local branch
+- `git push --all`: Push all branches
+- `git push --tags`: Publish tags that aren't yet in the remote repository
+
+<Tip>
+You can see all of the options with `git push` in [git-scm's documentation](https://git-scm.com/docs/git-push).
+</Tip>
+
+## Basic Workflow Example
+
+<Steps>
+  <Step title="Make changes locally">
+    Edit files in your working directory
+  </Step>
+  
+  <Step title="Stage changes">
+    ```bash
+    git add .
+    ```
+  </Step>
+  
+  <Step title="Commit changes">
+    ```bash
+    git commit -m "Add new feature"
+    ```
+  </Step>
+  
+  <Step title="Pull latest changes">
+    ```bash
+    git pull
+    ```
+    
+    This ensures you have the latest remote changes before pushing.
+  </Step>
+  
+  <Step title="Push to remote">
+    ```bash
+    git push
+    ```
+    
+    Or for a new branch:
+    
+    ```bash
+    git push -u origin feature-branch
+    ```
+  </Step>
+</Steps>
+
+## Why can't I push?
+
+If you are trying to `git push` but are running into problems, there are a few common solutions.
+
+### Check your branch
+
+Check what branch you are currently on with `git status`. If you are working on a protected branch, like `main`, you may be unable to push commits directly to the remote.
+
+<Warning>
+Many repositories have branch protection rules that prevent direct pushes to `main` or other important branches. In these cases, you'll need to create a pull request instead.
+</Warning>
+
+If this happens to you, it's OK! You can fix this a few ways.
+
+#### Work was not yet on any branch
+
+<Steps>
+  <Step title="Create and checkout a new branch">
+    Create a new branch from your current commit:
+    
+    ```bash
+    git checkout -b [branchname]
+    ```
+  </Step>
+  
+  <Step title="Push the new branch">
+    Push the new branch up to the remote:
+    
+    ```bash
+    git push -u origin [branchname]
+    ```
+  </Step>
+</Steps>
+
+#### Accidentally committed to the wrong branch
+
+<Steps>
+  <Step title="Checkout to the correct branch">
+    Checkout to the branch that you intended to commit to:
+    
+    ```bash
+    git checkout [branchname]
+    ```
+  </Step>
+  
+  <Step title="Merge the commits">
+    Merge the commits from the branch that you accidentally committed to:
+    
+    ```bash
+    git merge [main]
+    ```
+  </Step>
+  
+  <Step title="Push your changes">
+    ```bash
+    git push
+    ```
+  </Step>
+  
+  <Step title="Fix the other branch">
+    Fix the other branch by checking out to that branch, finding what commit it should be pointed to, and using `git reset --hard` to correct the branch pointer.
+  </Step>
+</Steps>
+
+### Remote has changes you don't have
+
+If someone else has pushed to the same branch, you'll get an error like:
+
+```bash
+! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'origin'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+```
+
+<Steps>
+  <Step title="Pull the remote changes">
+    ```bash
+    git pull
+    ```
+  </Step>
+  
+  <Step title="Resolve any conflicts">
+    If there are merge conflicts, resolve them and commit the merge.
+  </Step>
+  
+  <Step title="Push again">
+    ```bash
+    git push
+    ```
+  </Step>
+</Steps>
+
+## Force Pushing
+
+<Warning>
+**Use force push with extreme caution!**
+
+Force pushing (`git push -f`) rewrites history on the remote repository. This can cause serious problems for collaborators who have based work on the commits you're replacing.
+
+Only force push when:
+- You're working on a branch alone
+- You've coordinated with your team
+- You fully understand the consequences
+</Warning>
+
+If you must force push:
+
+```bash
+git push --force-with-lease
+```
+
+This is safer than `git push -f` because it will fail if someone else has pushed to the branch since you last fetched.
+
+## Pushing a New Branch
+
+When pushing a branch for the first time, you need to set up the tracking relationship:
+
+```bash
+git push -u origin feature-branch
+```
+
+The `-u` flag (short for `--set-upstream`) creates a tracking relationship between your local branch and the remote branch. After this, you can simply use `git push` and `git pull` without specifying the branch name.
+
+## Related Commands
+
+- [`git commit -m "descriptive message"`](/guides/git-commit): Records file snapshots permanently in version history
+- [`git clone [url]`](/guides/git-clone): Clone (download) a repository that already exists on GitHub, including all of the files, branches, and commits
+- [`git status`](/guides/git-status): Always a good idea, this command shows you what branch you're on, what files are in the working or staging directory, and any other important information
+- [`git pull`](/guides/git-pull): Updates your current local working branch with all new commits from the corresponding remote branch on GitHub. `git pull` is a combination of `git fetch` and `git merge`
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Git Pull" icon="download" href="/guides/git-pull">
+    Learn how to pull changes from the remote
+  </Card>
+  <Card title="Git Remote" icon="server" href="/guides/git-remote">
+    Manage your remote repositories
+  </Card>
+  <Card title="Git Status" icon="circle-info" href="/guides/git-status">
+    Check your repository status before pushing
+  </Card>
+  <Card title="Git Commit" icon="floppy-disk" href="/guides/git-commit">
+    Learn more about creating commits
+  </Card>
+</CardGroup>

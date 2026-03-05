@@ -1,0 +1,127 @@
+---
+title: Advanced Git Cheat Sheet
+description: Advanced Git commands for merge operations, stashing, checkout, patching, and prettified log viewing
+---
+
+This advanced cheat sheet covers more sophisticated Git operations for users who are comfortable with the basics and need quick reference for advanced workflows.
+
+<Note>
+  This cheat sheet is available in 25+ languages. Visit [github.com/github/training-kit](https://github.com/github/training-kit/tree/master/downloads) to access translations.
+</Note>
+
+## Merge Commands
+
+Advanced operations for managing merges.
+
+```bash
+git merge --abort
+```
+Abort the merge and return to the pre-merge state
+
+## Stash Commands
+
+Temporarily store modified, tracked files to change branches without committing.
+
+<AccordionGroup>
+  <Accordion title="Save to stash">
+    ```bash
+    git stash save <stash name>
+    ```
+    Save current changes to a stash with a particular name
+    
+    ```bash
+    git stash
+    ```
+    Save current changes to a stash (saves it as stash@{0})
+  </Accordion>
+
+  <Accordion title="Remove from stash">
+    ```bash
+    git stash drop
+    ```
+    Drop the stash at the top of the stack
+    
+    ```bash
+    git stash drop stash@{n}
+    ```
+    Drop the stash at the nth index
+  </Accordion>
+
+  <Accordion title="Apply stashed changes">
+    ```bash
+    git stash pop stash@{n}
+    ```
+    Apply the stash at the nth index and delete from the list
+    
+    ```bash
+    git stash apply stash@{n}
+    ```
+    Apply the stash at the nth index (keeps it in the stash list)
+  </Accordion>
+</AccordionGroup>
+
+## Checkout Commands
+
+Advanced operations for working with branches and restoring files.
+
+| Command | Description |
+|---------|-------------|
+| `git restore .` | Discards all the changes in the working directory |
+| `git switch -c <branch name>` | Create a new branch and switch to that branch |
+| `git restore --source=<stash@{0}> <filename>` | Bring a single file to the working space from the stash |
+
+<Tip>
+  The `git restore` and `git switch` commands are modern alternatives to `git checkout`, providing clearer separation between switching branches and restoring files.
+</Tip>
+
+## Patch Commands
+
+Apply changes from patch files to your repository.
+
+```bash
+git apply <patch file>
+```
+Apply a patch file (.diff or .patch) to the repo
+
+<Info>
+  Patch files are useful for sharing changes without using a remote repository or when working with contributors who don't have direct access to your repository.
+</Info>
+
+## Log Commands
+
+Advanced log viewing for better readability and analysis.
+
+```bash
+git log --pretty=oneline
+```
+Prettify the log history of git, displaying each commit on a single line
+
+<AccordionGroup>
+  <Accordion title="Additional log formatting options">
+    You can customize the log output further with additional flags:
+    
+    ```bash
+    git log --oneline --graph --all
+    ```
+    Shows a graphical representation of all branches
+    
+    ```bash
+    git log --pretty=format:"%h - %an, %ar : %s"
+    ```
+    Custom format showing hash, author, relative date, and subject
+  </Accordion>
+</AccordionGroup>
+
+## Quick Reference Table
+
+| Category | Command | Description |
+|----------|---------|-------------|
+| **Merge** | `git merge --abort` | Abort current merge |
+| **Stash** | `git stash` | Save changes to stash |
+| **Stash** | `git stash pop stash@{n}` | Apply and remove stash |
+| **Stash** | `git stash apply stash@{n}` | Apply stash (keep in list) |
+| **Restore** | `git restore .` | Discard all changes |
+| **Restore** | `git restore --source=stash@{0} [file]` | Restore file from stash |
+| **Switch** | `git switch -c [branch]` | Create and switch to branch |
+| **Patch** | `git apply [patch file]` | Apply patch file |
+| **Log** | `git log --pretty=oneline` | One-line log format |

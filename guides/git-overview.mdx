@@ -1,0 +1,181 @@
+---
+title: Git Overview
+description: Everything you need to know about Git, from getting started to advanced commands and workflows
+---
+
+## What is Git?
+
+Git is a distributed version control software. Version control is a way to save changes over time without overwriting previous versions. Being distributed means that every developer working with a Git repository has a copy of that entire repository – every commit, every branch, every file.
+
+<Note>
+If you're used to working with centralized version control systems, the distributed nature of Git is a big difference! Every developer has the complete project history on their local machine.
+</Note>
+
+### Key Concepts to Know
+
+Before getting started with Git, here are a few important things to understand:
+
+- **Branches are lightweight and cheap** - It's OK to have many of them
+- **Git stores changes in SHA hashes** - This works by compressing text files, making Git excellent for software programming but not ideal for binary files like images or videos
+- **Git repositories can be connected** - You can work locally on your machine and connect to a shared repository to [push](/guides/git-push) and [pull](/guides/git-pull) changes
+
+## What is Git Written in?
+
+The tools that make up the core Git distribution are written in C, Shell, Perl, and Tcl. You can find Git's source code on GitHub under [git/git](https://github.com/git/git).
+
+## Why Use Git?
+
+Version control is very important – without it, you risk losing your work. With Git, you can make a "commit", or a save point, as often as you'd like. You can also go back to previous commits.
+
+<Tip>
+Commit often and commit early, and you'll never have that gut-sinking feeling of overwriting or losing changes.
+</Tip>
+
+There are many version control systems out there – but Git has some major advantages.
+
+### Speed
+
+Git uses SHA compression, which makes it very fast for version control operations.
+
+### Merge Conflicts
+
+Git can handle merge conflicts, which means that **it's OK for multiple people to work on the same file at the same time**. This opens up the world of development in a way that isn't possible with centralized version control.
+
+<Note>
+You have access to the entire project, and if you're working on a branch, you can do whatever you need to and know that your changes are safe.
+</Note>
+
+### Cheap Branches
+
+Git offers a lot of flexibility and opportunity for collaboration with branches. **By using branches, developers can make changes in a safe sandbox.**
+
+Instead of only committing code that is 100% sure to succeed, developers can commit code that might still need help. Then, they can push that code to the remote and get fast feedback from integrated tests or peer review.
+
+### Ease of Roll Back
+
+If you make a mistake, it's OK! Commits are immutable, meaning they can't be changed. You can easily revert that change, or roll back the branch pointer to the commit where everything was fine.
+
+<Warning>
+You *can* change history, but it will create new replacement commits instead of editing the existing commits.
+</Warning>
+
+The benefits of this can't be overstated. Not only does it create a safer environment for the project and code, but it fosters a development environment where developers can be braver, trusting that Git has their back.
+
+## How Do I Use Git?
+
+### Learning Git Basics
+
+If you're getting started with Git, a great place to learn the basic commands is the [Git Cheat sheet](https://github.github.io/training-kit/). It's translated into many languages and is a great starting place for the fundamentals on the command line.
+
+Some of the most important and most used commands include:
+
+<CardGroup cols={2}>
+  <Card title="git clone" icon="download">
+    [Clone](/guides/git-clone) a repository that already exists on GitHub
+  </Card>
+  <Card title="git status" icon="circle-info">
+    Shows your current branch, working directory, and staging area
+  </Card>
+  <Card title="git add" icon="plus">
+    [Add](/guides/git-add) files to the staging area for commit
+  </Card>
+  <Card title="git commit" icon="floppy-disk">
+    [Record](/guides/git-commit) file snapshots permanently in version history
+  </Card>
+</CardGroup>
+
+#### Essential Commands Reference
+
+- `git clone [url]`: [Clone](/guides/git-clone) (download) a repository that already exists on GitHub, including all of the files, branches, and commits
+- `git status`: Always a good idea, this command shows you what branch you're on, what files are in the working or staging directory, and any other important information
+- `git branch`: Shows the existing branches in your local repository. Use `git branch [branch-name]` to create a branch from your current location, or `git branch --all` to see all branches
+- `git checkout [branch-name]`: Switches to the specified branch and updates the working directory
+- `git add [file]`: Snapshots the file in preparation for versioning, adding it to the staging area
+- `git commit -m "descriptive message"`: Records file snapshots permanently in the version history
+- `git pull`: Updates your current local working branch with all new commits from the corresponding remote branch on GitHub. `git pull` is a combination of `git fetch` and `git merge`
+- `git push`: Uploads all local branch commits to the remote
+- `git log`: Browse and inspect the evolution of project files
+- `git remote -v`: Show the associated remote repositories and their stored name, like `origin`
+
+### Getting Started With the Git Workflow
+
+The fundamental Git workflow has a few main steps:
+
+<Steps>
+  <Step title="Create a branch">
+    The main branch is usually called `main`. Create a branch off of `main` for your feature or purpose. We recommend naming branches based on the function or feature that will be the focus of this branch.
+    
+    ```bash
+    git branch feature-name
+    git checkout feature-name
+    ```
+  </Step>
+  
+  <Step title="Make changes and commit">
+    Once you've created a branch and checked out to it, you're ready to get to work. Make the changes in your repository using your favorite text editor or IDE.
+    
+    ```bash
+    git add [file]
+    git commit -m "descriptive commit message"
+    ```
+    
+    Learn more about [git add](/guides/git-add) and [git commit](/guides/git-commit).
+  </Step>
+  
+  <Step title="Push your changes to the remote">
+    To let others see your work and begin collaboration, push your changes using `git push`.
+    
+    ```bash
+    git push -u origin [branch-name]
+    ```
+    
+    If there has been a new commit on the remote, you may need to first run [`git pull`](/guides/git-pull) to incorporate the remote changes.
+  </Step>
+  
+  <Step title="Open a pull request">
+    A pull request is a comparison of two branches – typically `main` and your feature branch. Pull requests are the powerhouse of GitHub, enabling:
+    
+    - Automated tests to run on your code
+    - Peer code reviews
+    - Collaborative discussion
+  </Step>
+  
+  <Step title="Collaborate">
+    Pull requests should be open when work is *beginning*, not when it's finished! The earlier you open a pull request, the more visibility the entire team has to your work.
+  </Step>
+  
+  <Step title="Merge into main">
+    Once you and your team decide that the pull request looks good, you can merge it. By merging, you integrate the feature branch into `main`.
+    
+    <Tip>
+    Don't forget to delete your branch after merging! Branches are lightweight and cheap, and you should create a new one when you need it based on the most recent commit on the `main` branch.
+    </Tip>
+  </Step>
+</Steps>
+
+### Getting Started With GitHub
+
+While Git takes care of the underlying version control, GitHub is the collaboration platform built on top of it. GitHub is the place for pull requests, comments, reviews, integrated tests, and so much more.
+
+Most developers work locally to develop and use GitHub for collaboration. That ranges from using GitHub to host the shared remote repository to working with colleagues and capitalizing on features like protected branches, code review, GitHub Actions, and more.
+
+<Card title="Learn More" icon="graduation-cap" href="https://lab.github.com/githubtraining/introduction-to-github">
+  Practice using Git and GitHub with the Introduction to GitHub Learning Lab course
+</Card>
+
+## Related Guides
+
+<CardGroup cols={2}>
+  <Card title="Install Git" icon="download" href="/guides/install-git">
+    Learn how to install Git on any operating system
+  </Card>
+  <Card title="Git Init" icon="folder-plus" href="/guides/git-init">
+    Initialize a new Git repository
+  </Card>
+  <Card title="Git Clone" icon="clone" href="/guides/git-clone">
+    Clone an existing repository
+  </Card>
+  <Card title="Git Status" icon="circle-info" href="/guides/git-status">
+    Check the status of your working directory
+  </Card>
+</CardGroup>

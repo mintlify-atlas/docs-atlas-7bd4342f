@@ -1,0 +1,190 @@
+---
+title: Bash Cheat Sheet
+description: Quick reference guide for Bash shell commands including file operations, directory navigation, permissions, networking, and system tasks
+---
+
+Bash is the GNU Project's shell (Bourne Again SHell). Bash is an sh-compatible shell that incorporates useful features from the Korn shell (ksh) and C shell (csh). It is intended to conform to the IEEE POSIX P1003.2/ISO 9945.2 Shell and Tools standard. It offers functional improvements over sh for both programming and interactive use. In addition, most sh scripts can be run by Bash without modification.
+
+<Note>
+  This cheat sheet is available in 25+ languages. Visit [github.com/github/training-kit](https://github.com/github/training-kit/tree/master/downloads) to access translations.
+</Note>
+
+## Install Bash
+
+Bash is typically a native application on Linux/Unix based machines; however, if installation is necessary you can find links to downloads below.
+
+### Bash for Windows
+Because bash isn't native to Windows, an application like Cygwin would be necessary to gain the same features readily available in linux/macOS.
+
+[https://www.cygwin.com](https://www.cygwin.com)
+
+### Bash for macOS and Linux
+Bash is natively installed on Linux/Unix based machines.
+
+## Configure Shell
+
+Configuring bash aliases can save time and make common commands easier to use.
+
+```bash
+alias ls='ls -lGh'
+```
+Sets the ls command to list, colorize, and provide file size suffixes
+
+## Working with Directories
+
+Navigate, create, and delete directory folders and files.
+
+| Command | Description |
+|---------|-------------|
+| `pwd` | Display path of current working directory |
+| `cd [directory]` | Change working directory to [directory] |
+| `cd ..` | Navigate to the parent directory |
+| `ls` | List directory contents |
+| `ls -la` | List detailed directory contents, including hidden files |
+| `mkdir [directory]` | Create a new directory named [directory] |
+
+## Handling Output
+
+Control the flow of data from a file.
+
+<AccordionGroup>
+  <Accordion title="Display file contents">
+    ```bash
+    cat [file]
+    ```
+    Output the contents of [file]
+    
+    ```bash
+    less [file]
+    ```
+    Output the contents of [file] which supports pagination
+    
+    ```bash
+    head [file]
+    ```
+    Output the first 10 lines of [file]
+  </Accordion>
+
+  <Accordion title="Redirect output">
+    ```bash
+    [cmd] > [file]
+    ```
+    Direct the output of [cmd] into [file]
+    
+    ```bash
+    [cmd] >> [file]
+    ```
+    Append the output of [cmd] to [file]
+    
+    ```bash
+    [cmd1] | [cmd2]
+    ```
+    Direct the output of [cmd1] to the input of [cmd2]
+  </Accordion>
+
+  <Accordion title="Clear screen">
+    ```bash
+    clear
+    ```
+    Clear the bash window
+  </Accordion>
+</AccordionGroup>
+
+## Working with Files
+
+Moving, renaming, creating and deleting files.
+
+| Command | Description |
+|---------|-------------|
+| `rm [file]` | Delete [file] |
+| `rm -r [directory]` | Delete [directory] |
+| `rm -f [file]` | Force-delete [file] (add -r to force-delete a directory) |
+| `mv [file-old] [file-new]` | Rename [file-old] to [file-new] |
+| `cp [file] [directory]` | Copy [file] to [directory] (possibly overwriting an existing file) |
+| `cp -r [src-directory] [dest-directory]` | Copy [src-directory] and its contents to [dest-directory] (possibly overwriting files in an existing directory) |
+| `touch [file]` | Update file access and modification time (and create [file] if it does not exist) |
+
+## File and Folder Permissions
+
+Change read, write, and execute permissions on files and folders.
+
+<AccordionGroup>
+  <Accordion title="chmod - Change permissions">
+    ```bash
+    chmod 755 [file]
+    ```
+    Change permissions of [file] to 755
+    
+    <Info>
+      **Octal representation of permissions** are groups of permissions for User (u), Group (g) and Others (o) with values that are sum of read (4), write (2) and execute (1) permissions. For example, 755 is:
+      - Owner = 7; read (4) + write (2) + execute (1)
+      - Group = 5; read (4) + execute (1)
+      - Others = 5; read (4) + execute (1)
+    </Info>
+    
+    ```bash
+    chmod -R 600 [directory]
+    ```
+    Change permissions of [directory] (and its contents) to 600
+  </Accordion>
+
+  <Accordion title="chown - Change ownership">
+    ```bash
+    chown [user]:[group] [file]
+    ```
+    Change ownership of [file] to [user] and [group] (add -R to include a directory's contents)
+  </Accordion>
+</AccordionGroup>
+
+## Networking and Internet
+
+Commands for network operations, file transfers, and remote connections.
+
+| Command | Description |
+|---------|-------------|
+| `ping [ip/host]` | Ping the [ip/host] and displays time, among other things |
+| `curl -O [url]` | Downloads [url] to current working directory |
+| `ssh [user]@[ip/host]` | Starts an SSH connection to [host] using [user] |
+| `ssh-copy-id [user]@[host]` | Adds your SSH key to the host file for [user] to enable a keyed or passwordless login |
+| `scp [file] [user]@[ip/host]:/path/to/file` | Securely copies [file] to a remote [host] |
+| `wget [file]` | Downloads [file] to your current working directory |
+
+## System Tasks
+
+Find important information related to your currently running system.
+
+<AccordionGroup>
+  <Accordion title="Process management">
+    ```bash
+    ps ax
+    ```
+    List currently running processes
+    
+    ```bash
+    top
+    ```
+    Displays live information on your currently running processes
+    
+    ```bash
+    kill [pid]
+    ```
+    Ends the process using the provided process ID [pid]
+    
+    ```bash
+    killall [processname]
+    ```
+    Ends all processes with the given [processname]
+  </Accordion>
+
+  <Accordion title="Disk usage">
+    ```bash
+    df
+    ```
+    Shows disk usage
+    
+    ```bash
+    du [filename]
+    ```
+    Shows disk usage of all files and folders in [filename]
+  </Accordion>
+</AccordionGroup>
