@@ -1,0 +1,82 @@
+{
+  "projectType": "general",
+  "projectName": "GitHub Training Kit",
+  "projectDescription": "Open source courseware for Git and GitHub including cheat sheets, guides, and training materials",
+  "theme": "linden",
+  "primaryColor": "#24292f",
+  "lightColor": "#6e7781",
+  "darkColor": "#0d1117",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "introduction",
+              "quickstart"
+            ]
+          },
+          {
+            "group": "Git Guides",
+            "pages": [
+              "guides/git-overview",
+              "guides/install-git",
+              "guides/git-init",
+              "guides/git-clone",
+              "guides/git-add",
+              "guides/git-commit",
+              "guides/git-status",
+              "guides/git-push",
+              "guides/git-pull",
+              "guides/git-remote"
+            ]
+          },
+          {
+            "group": "Advanced Topics",
+            "pages": [
+              "advanced/submodules-vs-subtrees",
+              "advanced/svn-migration",
+              "advanced/git-concepts"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Cheat Sheets",
+        "groups": [
+          {
+            "group": "Reference",
+            "pages": [
+              "cheatsheets/git-cheatsheet",
+              "cheatsheets/bash-cheatsheet",
+              "cheatsheets/advanced-git"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Comprehensive Git command reference and cheat sheets",
+    "Step-by-step Git guides for common workflows",
+    "Multi-language support for cheat sheets (25+ languages)",
+    "Advanced Git topics including submodules, subtrees, and SVN migration",
+    "Bash shell command reference for developers"
+  ],
+  "publicApiSurface": [
+    "git init - Initialize a new Git repository",
+    "git clone - Clone a repository from a remote source",
+    "git add - Stage files for commit",
+    "git commit - Record changes to the repository",
+    "git status - Show the working tree status",
+    "git push - Upload local repository content to a remote repository",
+    "git pull - Fetch from and integrate with another repository",
+    "git remote - Manage set of tracked repositories",
+    "git branch - List, create, or delete branches",
+    "git merge - Join two or more development histories together",
+    "git submodule - Initialize, update or inspect submodules",
+    "git subtree - Merge subtrees together and split repository into subtrees"
+  ]
+}
